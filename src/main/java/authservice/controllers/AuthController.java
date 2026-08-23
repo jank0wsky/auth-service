@@ -1,5 +1,6 @@
 package authservice.controllers;
 
+import authservice.configs.Constants;
 import authservice.entities.UserMapper;
 import authservice.services.UserService;
 import authservice.utils.auths.JwtUtil;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Slf4j
 @RestController
-@RequestMapping("/auth")
+@RequestMapping(Constants.AUTH_ROUTE)
 public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
