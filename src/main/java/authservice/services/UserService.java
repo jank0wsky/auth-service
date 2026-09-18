@@ -2,6 +2,7 @@ package authservice.services;
 
 import authservice.services.interfaces.UserServiceInterface;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -37,8 +38,8 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public List<UserResponseDto> getAll(Pageable pageable) {
-        return userRepository.findAll().stream().map(UserMapper.INSTANCE::toDto).toList();
+    public Page<UserResponseDto> getAll(Pageable pageable) {
+        return userRepository.findAll(pageable).map(UserMapper.INSTANCE::toDto);
     }
 
     @Override
@@ -55,12 +56,14 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public UserResponseDto update(Long id, UserRequestDto dto) {
+        //we need to track which value has changed
         return null;
     }
 
     @Override
     public boolean deleteById(Long id) {
-        return false;
+        userRepository.delete(getEntity(id));
+        return true;
     }
 
     @Override

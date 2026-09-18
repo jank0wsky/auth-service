@@ -15,6 +15,7 @@ public class GlobalException {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
     }
 
+    // TODO: should not return message because of sensitive data
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleException(Exception ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

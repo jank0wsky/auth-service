@@ -1,8 +1,7 @@
 package authservice.services.interfaces;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import java.util.List;
 
 /**
  * Extended by every ServiceInterface
@@ -30,7 +29,7 @@ public interface BaseServiceInterface<E, RequestDto, ResponseDto> {
      * @param pageable pagination
      * @return list of entities
      */
-    List<ResponseDto> getAll(Pageable pageable);
+    Page<ResponseDto> getAll(Pageable pageable);
 
     /**
      * Crete entity

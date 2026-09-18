@@ -2,6 +2,7 @@ package authservice.utils.filters;
 
 import authservice.utils.auths.JwtUtil;
 import authservice.utils.auths.MyUserDetailsService;
+import authservice.utils.exceptions.AuthException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,21 +29,25 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain)
-            throws ServletException, IOException {
+            throws ServletException, IOException{
 
         String authHeader = request.getHeader("Authorization");
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
 
-            if (jwtUtil.validateToken(token)) {
-                try {
-                    UserDetails userDetails = myUserDetailsService.loadUserByUsername(jwtUtil.extractEmail(token));
-                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    SecurityContextHolder.getContext().setAuthentication(authToken);
-                } catch (UsernameNotFoundException e) {
-                    log.debug("JWT valid but user no longer exists");
+            try {
+                if (jwtUtil.validateToken(token)) {
+                    try {
+                        UserDetails userDetails = myUserDetailsService.loadUserByUsername(jwtUtil.extractEmail(token));
+                        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                        authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                        SecurityContextHolder.getContext().setAuthentication(authToken);
+                    } catch (UsernameNotFoundException e) {
+                        log.debug("JWT valid but user no longer exists");
+                    }
                 }
+            } catch (AuthException e){
+                log.debug(e.getMessage());
             }
         }
 
