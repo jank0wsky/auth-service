@@ -28,11 +28,11 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/*.html", "/css/**", "/js/**", "/images/**").permitAll()  //static HTML
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()           //swagger
-                        .requestMatchers("/auth/**").permitAll()                                    //login and sign-in routes
-                        .requestMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()                 //allows OPTIONS header for all routes
-                        .anyRequest().authenticated()                                                        //everything else authenticated
+                        .requestMatchers("/*.html", "/css/**", "/js/**", "/images/**").permitAll()    //static HTML
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()             //swagger
+                        .requestMatchers(Constants.AUTH_ROUTE + "/**").permitAll()                    //login and sign-in routes
+                        .requestMatchers(HttpMethod.OPTIONS, Constants.API_ROUTE + "/**").permitAll() //allows OPTIONS header for all routes
+                        .anyRequest().authenticated()                                                          //everything else authenticated
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterAt(jwtFilter, UsernamePasswordAuthenticationFilter.class)
