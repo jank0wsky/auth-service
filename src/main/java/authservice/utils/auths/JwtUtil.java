@@ -17,13 +17,13 @@ import java.time.Instant;
 @Slf4j
 @Component
 public class JwtUtil {
-    @Value( "${jwt.secret}")
+    @Value( "${jwt.secret:auth-service-default-secret-key-dont-share-this-it-is-top-secret}")
     private String SECRET_KEY;
 
     @Value( "${jwt.expiration:3600000}")
     private long EXPIRATION_TIME;
 
-    @Value("${spring.application.name}")
+    @Value("${spring.application.name:auth-service}")
     private String issuer;
 
     private Algorithm algorithm;
