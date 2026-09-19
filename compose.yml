@@ -1,0 +1,36 @@
+services:
+
+  database:
+    image: postgres:18.6-alpine
+    container_name: postgresql
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: auth-service
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql
+    networks:
+      - auth-network
+
+  service:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: auth-service
+    ports:
+      - "9999:9999"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/auth-service?currentSchema=auth-service
+    networks:
+      - auth-network
+    depends_on:
+      - database
+
+volumes:
+  postgres-data:
+
+networks:
+  auth-network:
