@@ -21,6 +21,6 @@ public class Permission {
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @Column(name = "descriptions")
+    @Column(name = "description")
     private String description;
 }
