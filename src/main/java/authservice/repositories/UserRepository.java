@@ -1,6 +1,6 @@
 package authservice.repositories;
 
-import authservice.entities.User;
+import authservice.entities.users.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

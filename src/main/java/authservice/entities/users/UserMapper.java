@@ -1,4 +1,4 @@
-package authservice.entities;
+package authservice.entities.users;
 
 import authservice.utils.auths.dtos.SignInDto;
 import org.mapstruct.Mapper;

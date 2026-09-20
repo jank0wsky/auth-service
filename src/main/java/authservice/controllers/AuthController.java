@@ -1,7 +1,7 @@
 package authservice.controllers;
 
 import authservice.configs.Constants;
-import authservice.entities.UserMapper;
+import authservice.entities.users.UserMapper;
 import authservice.services.UserService;
 import authservice.utils.auths.JwtUtil;
 import authservice.utils.auths.dtos.JwtDto;

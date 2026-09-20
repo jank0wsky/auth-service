@@ -1,8 +1,8 @@
 package authservice.controllers;
 
 import authservice.configs.Constants;
-import authservice.entities.UserRequestDto;
-import authservice.entities.UserResponseDto;
+import authservice.entities.users.UserRequestDto;
+import authservice.entities.users.UserResponseDto;
 import authservice.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

@@ -1,8 +1,8 @@
 package authservice.services.interfaces;
 
-import authservice.entities.User;
-import authservice.entities.UserRequestDto;
-import authservice.entities.UserResponseDto;
+import authservice.entities.users.User;
+import authservice.entities.users.UserRequestDto;
+import authservice.entities.users.UserResponseDto;
 
 /**
  * Methods specific for UserService should be named here

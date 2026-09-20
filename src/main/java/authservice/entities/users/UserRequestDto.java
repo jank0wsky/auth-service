@@ -1,4 +1,4 @@
-package authservice.entities;
+package authservice.entities.users;
 
 public record UserRequestDto(
         String email,

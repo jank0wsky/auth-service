@@ -6,15 +6,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import authservice.entities.User;
-import authservice.entities.UserMapper;
-import authservice.entities.UserRequestDto;
-import authservice.entities.UserResponseDto;
+import authservice.entities.users.User;
+import authservice.entities.users.UserMapper;
+import authservice.entities.users.UserRequestDto;
+import authservice.entities.users.UserResponseDto;
 import authservice.repositories.UserRepository;
 import authservice.utils.exceptions.EntityNotFoundException;
 import authservice.utils.exceptions.EntityNotSavedException;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @Service
